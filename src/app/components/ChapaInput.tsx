@@ -1,11 +1,23 @@
+"use client"
 import {env} from "process";
+import { useEffect, useState } from "react";
+import { generateRef } from "../utils/tx_ref";
 
 export default function ChapaInput(){
+    const [reference, setReference] = useState("");
+
+    useEffect(()=>{
+        
+        const tx =  generateRef();
+        console.log(tx)
+        setReference(tx);
+    },[]);
+
     return(
         <>
     <form method="POST" action="https://api.chapa.co/v1/hosted/pay" className="flex flex-col gap-5" >
         <input type="hidden" name="public_key" value={env.CHAPA_PUBLIC_KEY } />
-        <input type="hidden" name="tx_ref" value="tx-6416yf38sfds9" />
+        <input type="hidden" name="tx_ref" value={reference} />
         <input type="hidden" name="amount" value="40000" />
         <input type="hidden" name="currency" value="ETB" />
         <input type="hidden" name="email" value="abel@gamil.com" />
