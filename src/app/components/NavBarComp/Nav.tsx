@@ -14,7 +14,6 @@ export default function Nav() {
         <div className="font-bold text-4xl">
           Sabi Logo
         </div>
-{/* Suggested code may be subject to a license. Learn more: ~LicenseLog:686285874. */}
         <ul className="items-center space-x-8 hidden md:flex text-black">
           {NavigationMenuData.map((menu, idx) => {
 							return (
