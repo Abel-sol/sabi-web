@@ -11,7 +11,7 @@ export default function Home() {
 
         <h1 className="text-4xl font-bold">Sabi 🎉</h1>
         <p className="text-lg  font-semibold">Your one-stop destination for finding where to go out.<br />
-          Book your tickets while on your couch</p>
+          Book your tickets from the comfort of your home.</p>
         <div className="flex justify between gap-10 mt-5">
 
         <button className="bg-blue-500 text-white p-2 rounded-md">
