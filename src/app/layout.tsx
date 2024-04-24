@@ -1,3 +1,4 @@
+import SessionProvider from "@/components/session/SessionProvider";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { Inter as FontSans } from "next/font/google";
@@ -26,9 +27,9 @@ export default async function RootLayout({
     <html lang="en">
       <body className={fontSans.className}>
         <main>
-          {/* <SessionProvider session={session}> */}
-          {children}
-          {/* </SessionProvider> */}
+          <SessionProvider session={session}>
+            {children}
+          </SessionProvider>
         </main>
       </body>
     </html>
