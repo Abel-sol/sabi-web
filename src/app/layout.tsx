@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
-import { Inter } from "next/font/google";
-import SessionProvider from "../components/session/SessionProvider";
+import { Inter as FontSans } from "next/font/google";
 import { authOptions } from "./api/auth/[...nextauth]/options";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Sabi",
@@ -22,11 +24,11 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={fontSans.className}>
         <main>
-          <SessionProvider session={session}>
-            {children}
-          </SessionProvider>
+          {/* <SessionProvider session={session}> */}
+          {children}
+          {/* </SessionProvider> */}
         </main>
       </body>
     </html>
