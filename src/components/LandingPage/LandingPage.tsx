@@ -1,4 +1,6 @@
+import { signIn } from "next-auth/react";
 import Nav from "../NavBarComp/Nav";
+import { Button } from "../ui/button";
 
 const LandingPage = () => {
 
@@ -12,13 +14,12 @@ const LandingPage = () => {
           <p className="text-lg  font-semibold">Your one-stop destination for finding where to go out.<br />
             Book your tickets from the comfort of your home.</p>
           <div className="flex justify between gap-10 mt-5">
-
-            <button className="bg-blue-500 text-white p-2 rounded-md">
+            <Button onClick={() => signIn("google", { callbackUrl: "/" })} className="bg-indigo-500 text-white p-2 rounded-xl hover:opacity-75 hover:bg-indigo-500 px-5 duration-75" >
+              Sign in
+            </Button>
+            {/* <Button onClick={() => signIn(undefined)} className="bg-indigo-500 text-white p-2 rounded-xl hover:opacity-75 hover:bg-indigo-500 px-5 duration-75" >
               Login
-            </button>
-            <button className="bg-blue-500 text-white p-2 rounded-md">
-              Sign Up
-            </button>
+            </Button> */}
           </div>
         </div>
       </div>
