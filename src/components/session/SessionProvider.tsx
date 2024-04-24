@@ -2,7 +2,7 @@
 
 import { Session } from 'next-auth';
 import { SessionProvider as NextAuthProvider } from "next-auth/react";
-import Login from '../Register/Login';
+import LandingPage from '../LandingPage/LandingPage';
 
 type props = {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ type props = {
 export default function SessionProvider({ children, session }: props) {
   return (
     <NextAuthProvider session={session}>
-      {!session ? (<Login />) : (children)}
+      {!session ? (<LandingPage />) : (children)}
     </NextAuthProvider>
   )
 }
