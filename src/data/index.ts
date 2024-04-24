@@ -7,12 +7,9 @@ export const NavigationMenuData = [
         name: "About Us",
         link: "/about-us"
     },
-    {
-        name: "Login",
-        link: "/login"
-    },
-    {
-        name: "Sign up",
-        link: "/signup"
-    }
+    // {
+    //     name: "Sign",
+    //     link: "/auth/login"
+    // },
+    
 ]
