@@ -1,4 +1,3 @@
-import { getAnalytics } from "firebase/analytics";
 import { getApp, getApps, initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
@@ -10,18 +9,17 @@ import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_CONFIG_API_KEY as string,
-  authDomain: "sabi-web-66bb6.firebaseapp.com",
-  projectId: "sabi-web-66bb6",
-  storageBucket: "sabi-web-66bb6.appspot.com",
-  messagingSenderId: "421254285238",
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN as string,
+  projectId: process.env.FIREBASE_PROJECT_ID as string,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET as string,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID as string,
   appId: process.env.FIREBASE_CONFIG_APP_ID as string,
-  measurementId: "G-K45H3XHYM3"
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID as string
 };
 
 // Initialize Firebase
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-export { analytics, db };
+export { db };
 
