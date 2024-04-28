@@ -1,12 +1,23 @@
+import EventListings from "@/components/Events/EventListings";
 import Nav from "@/components/NavBarComp/Nav";
+import { getEvents } from "../../firebase/firestore";
+import { EventData } from "../../type";
 
-export default function Home() {
+
+export default async function Home() {
+  // const searchParams = useParams();
+
+  const eventData = await getEvents();
+  // console.log(eventData);
+  let arr: EventData[] = Object.values(eventData);
 
   return (
-    <div className="flex flex-col  h-screen  bg-gradient-to-t from-white to-indigo-500">
+    <div className="flex flex-col  h-screen  bg-white">
       <Nav />
       {/* <ChapaInput /> */}
+      <EventListings initialEvents={arr} />
 
+      {/* TODO: will add searchParams to eventlistings for filtering events */}
     </div>
   );
 }
