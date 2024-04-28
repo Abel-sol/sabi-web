@@ -1,9 +1,10 @@
 "use client"
 import { NavigationMenuData } from "@/data";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
+import NewEvent from "../Events/NewEvent";
 import Logo from "./Logo";
 import NavItem from "./NavItem";
 
@@ -12,7 +13,7 @@ export default function Nav() {
 	const [toggle, setToggle] = useState(false);
 
 	return (
-		<nav className=" flex w-full justify-end items-center px-10 py-5 bg-indigo-400 sticky top-0 z-50 mx-auto shadow-xl rounded-b-sm">
+		<nav className=" flex w-full justify-end items-center px-10 py-3 pb-0 bg-indigo-400 sticky top-0 z-50 mx-auto shadow-xl rounded-b-sm">
 			<div className="flex w-full justify-between sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ">
 				<Logo />
 				<ul className="items-center space-x-8 hidden md:flex text-black">
@@ -23,6 +24,10 @@ export default function Nav() {
 							</NavItem>
 						);
 					})}
+					<NewEvent />
+					<li>
+						<button className="p-5 bg-blue-400 text-white " onClick={() => signOut()} >signout</button>
+					</li>
 				</ul>
 				<div className="md:hidden flex flex-1 justify-end items-center ">
 
@@ -55,6 +60,8 @@ export default function Nav() {
 								);
 							})}
 							<li>{session && <img src="" alt="profile" className="object-cover w-10 h-10 rounded-full" />}</li>
+							{//TODO: add signout button
+							}
 						</ul>
 					</div>
 				</div>
