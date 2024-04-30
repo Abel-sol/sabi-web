@@ -8,7 +8,6 @@ export const EventDatas = ({ catagory, city, price }: metadataprops) => (
     <p>
       {catagory} | {city}
     </p>
-    {/* <p>{"$".repeat(event.price)}</p> */}
     <p>$ {`${price}`}</p>
   </div>
 );
