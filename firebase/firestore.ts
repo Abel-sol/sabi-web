@@ -1,11 +1,12 @@
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where,doc } from "firebase/firestore";
 import { db } from "./firebase";
+import { data } from '../src/lib/fakeData';
 
 export async function getEvents(filters = {} ) {
-  let q = query(collection(db,"events"));
-  // q = applyQueryFilters(q, filters);
   let querySnapshot;
   try{
+    let q = query(collection(db,"events"));
+    // q = applyQueryFilters(q, filters);
 
      querySnapshot = await getDocs(q);
 
