@@ -11,7 +11,7 @@ export function EventItem({ event, className }: itemtype) {
 
   return (
     <li className={`${className}`}>
-      <Link href={`/events/${event.id}`}>
+      <Link href={`/${event.id}`}>
         <EventCards event={event} />
       </Link>
     </li>
