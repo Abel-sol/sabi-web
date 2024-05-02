@@ -1,15 +1,22 @@
 "use client"
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { EventData } from '../../../type';
+import ChapaInput from "../ChapaInput";
 import { Button } from "../ui/button";
-
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "../ui/drawer";
 type props = {
   eventData: EventData
 }
 const Event = ({ eventData }: props) => {
   const router = useRouter();
+  const session = useSession();
+  const [reference, setReference] = useState("");
   if (!eventData) router.push("/");
-  console.log(eventData);
+
+
+
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-12 px-4 md:px-0">
       <div className="flex flex-col gap-4">
@@ -47,7 +54,25 @@ const Event = ({ eventData }: props) => {
           </div>
         </div>
         <div className="flex justify-center">
-          <Button className="w-full hover:bg-indigo-400 bg-indigo-500">Checkout</Button>
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Button className="w-full hover:bg-indigo-400 bg-indigo-500">Checkout</Button>
+            </DrawerTrigger>
+            <DrawerContent className="w-full max-w-md" >
+              <DrawerHeader >
+                <DrawerTitle>Checkout</DrawerTitle>
+                <DrawerDescription>Complete your purchase by placing an order.</DrawerDescription>
+              </DrawerHeader>
+
+              <ChapaInput
+                eventName={eventData.name}
+                price={eventData.price}
+                fname={session.data?.user?.name ?? ""}
+                email={session.data?.user?.email ?? ""}
+              />
+
+            </DrawerContent>
+          </Drawer>
         </div>
       </div>
     </div>
