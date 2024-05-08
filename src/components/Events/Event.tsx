@@ -41,7 +41,7 @@ const Event = ({ eventData }: props) => {
       amount: eventData.price.toString(),
       tx_ref: tx_ref,
       callback_url: 'https://example.com/',
-      return_url: 'http://localhost:3000/thankyou',
+      return_url: 'https://sabi-web.vercel.app/thankyou',
       customization: {
         title: 'Sabi payment',
         description: 'Test Description',
