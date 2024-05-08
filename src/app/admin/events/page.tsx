@@ -51,7 +51,7 @@ const Page = async () => {
               </CardHeader>
               <CardContent>
                 {/* <div className="text-sm text-gray-500 dark:text-gray-400">{event.date}</div> */}
-                <div className="text-3xl font-bold">{event.catagory}</div> {/* TODO: refactor typo to category */}
+                <div className="text-3xl font-bold">{event.category}</div> {/* TODO: refactor typo to category */}
                 <div className="text-3xl font-bold">${event.price}</div>
               </CardContent>
             </Card>
