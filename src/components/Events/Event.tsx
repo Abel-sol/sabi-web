@@ -35,7 +35,7 @@ const Event = ({ eventData }: props) => {
     // const response =
     await chapa.initialize({
       first_name: session.data.user.name ?? "",
-      last_name: "",
+      last_name: "doe",
       email: session.data.user.email ?? "",
       currency: 'ETB',
       amount: eventData.price.toString(),

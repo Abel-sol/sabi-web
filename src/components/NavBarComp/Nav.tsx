@@ -72,10 +72,10 @@ export default function Nav() {
 	// )
 
 	return (
-		<div className="flex flex-col">
+		<div className="flex flex-col sticky">
 			<header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-indigo-500">
 				<div className="flex-1">
-					<h1 className="font-semibold text-lg text-white">Sabi🎉</h1>
+					<h1 className="font-semibold text-4xl  text-white">Sabi🎉</h1>
 				</div>
 				<div className="flex flex-1 items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
 					<form className="ml-auto flex-1 sm:flex-initial">
