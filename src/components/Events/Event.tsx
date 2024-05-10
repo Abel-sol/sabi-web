@@ -35,13 +35,12 @@ const Event = ({ eventData }: props) => {
     // const response =
     await chapa.initialize({
       first_name: session.data.user.name ?? "",
-      last_name: "doe",
+      last_name: "s",
       email: session.data.user.email ?? "",
       currency: 'ETB',
       amount: eventData.price.toString(),
       tx_ref: tx_ref,
-      callback_url: 'https://example.com/',
-      return_url: 'https://sabi-web.vercel.app/thankyou',
+      callback_url: 'https://sabi-web.vercel.app/thankyou',
       customization: {
         title: 'Sabi payment',
         description: 'Test Description',
