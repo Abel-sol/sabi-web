@@ -57,6 +57,10 @@ const Event = ({ eventData }: props) => {
       },
 
     })
+    if (!res.ok) {
+      console.log("problem with res")
+      return;
+    }
     const data = await res.json();
     console.log(data.details);
     if (data.details.data?.checkout_url) {
