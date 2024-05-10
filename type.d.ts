@@ -4,7 +4,7 @@ export interface EventData {
   city: string;
   category: string;
   price: number;
-  photo: string;
+  image: string;
   location: string;
   date: string;
   description: string;

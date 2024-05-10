@@ -54,10 +54,10 @@ const Event = ({ eventData }: props) => {
     <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-12 px-4 md:px-0">
       <div className="flex flex-col gap-4">
         <img
-          alt="Product Image"
+          alt="product"
           className="w-full rounded-lg object-cover aspect-square"
           height={600}
-          src={eventData.photo ? eventData.photo : "/placeholder.svg"}
+          src={eventData.image ? eventData.image : "../../../public/placeholder-user.png"}
           width={600}
         />
       </div>
