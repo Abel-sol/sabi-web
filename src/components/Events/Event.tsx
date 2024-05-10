@@ -1,8 +1,8 @@
 "use client"
-import { Chapa } from "chapa-nodejs";
+import { generateRef } from "@/utils/tx_ref";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EventData } from '../../../type';
 import { Button } from "../ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "../ui/drawer";
@@ -13,39 +13,59 @@ const Event = ({ eventData }: props) => {
   const router = useRouter();
   const session = useSession();
   const [reference, setReference] = useState("");
+  const [event, setEvent] = useState({ ...eventData });
   if (!eventData) router.push("/");
 
-  // useEffect(() => {
-  //   const tx = generateRef();
-  //   setReference(tx);
-  // }, []);
+  useEffect(() => {
+    const tx = generateRef();
+    setReference(tx);
+  }, []);
 
   const onSubmit = async () => {
 
     if (!session.data?.user) return;
 
-    const chapa = new Chapa({
-      secretKey: process.env.CHAPA_SECRET_KEY as string,
-    });
+    // const chapa = new Chapa({
+    //   secretKey: process.env.CHAPA_SECRET_KEY as string,
+    // });
 
-    const tx_ref = await chapa.generateTransactionReference({
-      prefix: 'TX', // defaults to `TX`
-      size: 20, // defaults to `15`
-    });
-    // const response =
-    await chapa.initialize({
-      first_name: session.data.user.name ?? "",
-      last_name: "s",
-      email: session.data.user.email ?? "",
-      currency: 'ETB',
-      amount: eventData.price.toString(),
-      tx_ref: tx_ref,
-      callback_url: 'https://sabi-web.vercel.app/thankyou',
-      customization: {
-        title: 'Sabi payment',
-        description: 'Test Description',
+    // const tx_ref = await chapa.generateTransactionReference({
+    //   prefix: 'TX', // defaults to `TX`
+    //   size: 20, // defaults to `15`
+    // });
+    // // const response =
+    // await chapa.initialize({
+    //   first_name: session.data.user.name ?? "",
+    //   last_name: "s",
+    //   email: session.data.user.email ?? "",
+    //   currency: 'ETB',
+    //   amount: eventData.price.toString(),
+    //   tx_ref: tx_ref,
+    //   callback_url: 'https://sabi-web.vercel.app/thankyou',
+    //   customization: {
+    //     title: 'Sabi payment',
+    //     description: 'Test Description',
+    //   },
+    // });
+    await fetch("https://api.chapa.co/v1/hosted/pay", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": process.env.CHAPA_SECRET_KEY as string
       },
-    });
+      body: JSON.stringify({
+        "amount": event.price,
+        "currency": "ETB",
+        "email": session.data?.user?.email ?? "",
+        "first_name": session.data?.user?.name ?? "",
+        "last_name": "",
+        "tx_ref": reference,
+        "return_url": "https://sabi-web.vercel.app/thankyou",
+        "customization[title]": "Payment for Sabi Events",
+        "customization[description]": "I love online payments"
+      })
+    })
+
 
   }
 
@@ -56,33 +76,33 @@ const Event = ({ eventData }: props) => {
           alt="product"
           className="w-full rounded-lg object-cover aspect-square"
           height={600}
-          src={eventData.image ? eventData.image : "../../../public/placeholder-user.png"}
+          src={event.image ? event.image : "../../../public/placeholder-user.png"}
           width={600}
         />
       </div>
       <div className="flex flex-col gap-6">
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold">{eventData.name}</h1>
+          <h1 className="text-3xl font-bold">{event.name}</h1>
           <p className="text-gray-500 dark:text-gray-400">
-            {eventData.description}
+            {event.description}
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400">Category</p>
-            <p className="font-medium">{eventData.category}</p>
+            <p className="font-medium">{event.category}</p>
           </div>
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400">Price</p>
-            <p className="font-medium">${eventData.price}</p>
+            <p className="font-medium">${event.price}</p>
           </div>
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400">Location</p>
-            <p className="font-medium">{eventData.location}</p>
+            <p className="font-medium">{event.location}</p>
           </div>
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400">Date</p>
-            <p className="font-medium">{eventData.date}</p>
+            <p className="font-medium">{event.date}</p>
           </div>
         </div>
         <div className="flex justify-center">
@@ -97,22 +117,22 @@ const Event = ({ eventData }: props) => {
               </DrawerHeader>
               {/* 
               <ChapaInput
-                eventName={eventData.name}
-                price={eventData.price}
+                eventName={event.name}
+                price={event.price}
                 fname={session.data?.user?.name ?? ""}
                 email={session.data?.user?.email ?? ""}
               /> */}
-              {/* <form method="POST" action="https://api.chapa.co/v1/hosted/pay" className="flex flex-col gap-5" >
+              {/* <form onSubmit={onSubmit} className="flex flex-col gap-5" >
                 <input type="hidden" name="public_key" value="CHAPUBK_TEST-2ayggpjUwuEoRYFStQGlJFQekC0Qa6lR" />
                 <input type="hidden" name="tx_ref" value={reference} />
-                <input type="hidden" name="amount" value={eventData.price} />
+                <input type="hidden" name="amount" value={event.price} />
                 <input type="hidden" name="currency" value="ETB" />
                 <input type="hidden" name="email" value={session.data?.user?.email ?? ""} />
                 <input type="hidden" name="first_name" value={session.data?.user?.name ?? ""} />
-                <input type="hidden" name="title" value={eventData.name} />
+                <input type="hidden" name="title" value={event.name} />
                 <input type="hidden" name="description" value="Paying in Confidence with cahpa." />
                 <input type="hidden" name="logo" value="https://chapa.link/asset/images/chapa_swirl.svg" />
-                {/* <input type="hidden" name="callback_url" value="http://localhost:3000/thankyou" /> 
+                <input type="hidden" name="callback_url" value="http://localhost:3000/thankyou" />
                 <input type="hidden" name="return_url" value="http://localhost:3000/thankyou" />
                 <input type="hidden" name="meta[title]" value="test" />
 
@@ -127,7 +147,7 @@ const Event = ({ eventData }: props) => {
               {/* <form method="POST" onSubmit={onSubmit} >
                 <input type="hidden" name="public_key" value={process.env.CHAPA_PUBLIC_KEY} />
                 <input type="hidden" name="tx_ref" value={reference} />
-                <input type="hidden" name="amount" value={eventData.price ?? 0} />
+                <input type="hidden" name="amount" value={event.price ?? 0} />
                 <input type="hidden" name="currency" value="ETB" />
                 <input type="hidden" name="email" value={session.data?.user?.email ?? ""} />
                 <input type="hidden" name="first_name" value={session.data?.user?.name ?? ""} />
