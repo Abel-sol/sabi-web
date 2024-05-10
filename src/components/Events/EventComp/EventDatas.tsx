@@ -4,10 +4,10 @@ type metadataprops = {
   price: number;
 }
 export const EventDatas = ({ category, location, price }: metadataprops) => (
-  <div className="font-semibold text-black flex align-center justify-between">
+  <div className="font-medium text-black flex align-center justify-between gap-2">
     <p>
       {category} | {location}
     </p>
-    <p>$ {`${price}`}</p>
+    <p>${price}</p>
   </div>
 );

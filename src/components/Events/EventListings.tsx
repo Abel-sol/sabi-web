@@ -18,7 +18,7 @@ function EventListings({ initialEvents }: props) {
         {events.map((event: EventData) => (
           <EventItem key={event.id}
             event={event}
-            className={"w-72 bg-white shadow-md  rounded-xl duration-500 hover:scale-100 hover:shadow-xl hover:shadow-indigo-400"} />
+            className={"w-80 bg-slate-100 shadow-md  rounded-xl duration-500 hover:scale-105 hover:shadow-xl"} />
         ))}
 
       </ul>

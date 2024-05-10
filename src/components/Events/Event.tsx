@@ -1,8 +1,7 @@
 "use client"
-import { generateRef } from "@/utils/tx_ref";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { EventData } from '../../../type';
 import { Button } from "../ui/button";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "../ui/drawer";
@@ -16,10 +15,10 @@ const Event = ({ eventData }: props) => {
   const [event, setEvent] = useState({ ...eventData });
   if (!eventData) router.push("/");
 
-  useEffect(() => {
-    const tx = generateRef();
-    setReference(tx);
-  }, []);
+  // useEffect(() => {
+  //   const tx = generateRef();
+  //   setReference(tx);
+  // }, []);
 
   const onSubmit = async () => {
 
@@ -41,32 +40,28 @@ const Event = ({ eventData }: props) => {
     //   currency: 'ETB',
     //   amount: eventData.price.toString(),
     //   tx_ref: tx_ref,
-    //   callback_url: 'https://sabi-web.vercel.app/thankyou',
+    //   callback_url: 'http://localhost:3000/thankyou',
     //   customization: {
     //     title: 'Sabi payment',
     //     description: 'Test Description',
     //   },
     // });
-    await fetch("https://api.chapa.co/v1/hosted/pay", {
+
+    const res = await fetch("/api/chapa", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": process.env.CHAPA_SECRET_KEY as string
-      },
       body: JSON.stringify({
-        "amount": event.price,
-        "currency": "ETB",
-        "email": session.data?.user?.email ?? "",
-        "first_name": session.data?.user?.name ?? "",
-        "last_name": "",
-        "tx_ref": reference,
-        "return_url": "https://sabi-web.vercel.app/thankyou",
-        "customization[title]": "Payment for Sabi Events",
-        "customization[description]": "I love online payments"
-      })
+        ...event
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+
     })
-
-
+    const data = await res.json();
+    console.log(data.details);
+    if (data.details.data?.checkout_url) {
+      router.push(data.details.data.checkout_url);
+    }
   }
 
   return (
