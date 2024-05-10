@@ -12,7 +12,7 @@ function EventListings({ initialEvents }: props) {
   const [events, setEvent] = useState(initialEvents);
   // console.log(events);
   return (
-    <div>
+    <div className="mx-auto">
       <ul className="grid grid-cols-3 gap-[40px]">
 
         {events.map((event: EventData) => (
