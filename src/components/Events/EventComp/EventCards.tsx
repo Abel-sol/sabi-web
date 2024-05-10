@@ -4,7 +4,7 @@ import { ImageCover } from "./ImageCover";
 
 export function EventCards({ event }: { event: EventData }) {
   return (<div>
-    <ImageCover photo={event.photo} name={event.name} />
+    <ImageCover image={event.image} name={event.name} />
     <EventDetails event={event} />
   </div>)
 }
