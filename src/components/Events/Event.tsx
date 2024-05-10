@@ -58,7 +58,8 @@ const Event = ({ eventData }: props) => {
 
     })
     if (!res.ok) {
-      console.log("problem with res")
+      console.log("problem with res");
+      console.log(res);
       return;
     }
     const data = await res.json();
