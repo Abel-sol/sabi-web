@@ -12,10 +12,10 @@
   resolved "https://registry.yarnpkg.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz#7bf68b20c0a350f936915fcae06f58e32007ce30"
   integrity sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==
 
-"@auth/core@0.30.0":
-  version "0.30.0"
-  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.30.0.tgz#78b74b13a1e2193b7b2ae42c0f7dc2fb4e698b2d"
-  integrity sha512-8AE4m/nk+4EIiVCJwxZAsJeAQuzpEC8M8768mmKVn60CGDdupKQkVhxbRlm5Qh7eNRCoFFME+0DvtaX2aXrYaA==
+"@auth/core@0.31.0":
+  version "0.31.0"
+  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.31.0.tgz#b2b43a8a1c21dc1065cd15e627a4dc47e3cfcab2"
+  integrity sha512-UKk3psvA1cRbk4/c9CkpWB8mdWrkKvzw0DmEYRsWolUQytQ2cRqx+hYuV6ZCsngw/xbj9hpmkZmAZEyq2g4fMg==
   dependencies:
     "@panva/hkdf" "^1.1.1"
     "@types/cookie" "0.6.0"
@@ -25,12 +25,12 @@
     preact "10.11.3"
     preact-render-to-string "5.2.3"
 
-"@auth/firebase-adapter@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@auth/firebase-adapter/-/firebase-adapter-2.0.0.tgz#b5807abe3e9591c328d38e8a65867b160c2c3bf5"
-  integrity sha512-7ud6L2SdytKe0rlJ3wef6rIIcd1lOVsQDinXjPqeYGN+54dtvaIiKGfc94qJzJMcOx4hLgknW2SmYl6kLl4RDA==
+"@auth/firebase-adapter@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@auth/firebase-adapter/-/firebase-adapter-2.1.0.tgz#38c7a3eb7c7818218308229022abbc4458d7ee05"
+  integrity sha512-M/xHf9Dej43WOPh9gWdschnpJvXoyJrbeGqLrOKSJOx/hkQHQE3m3qgQWVInzhevW0Er6MBjRRMrpguQOo89ig==
   dependencies:
-    "@auth/core" "0.30.0"
+    "@auth/core" "0.31.0"
 
 "@babel/runtime@^7.13.10", "@babel/runtime@^7.20.13", "@babel/runtime@^7.24.1":
   version "7.24.4"
