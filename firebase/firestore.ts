@@ -1,6 +1,5 @@
-import { addDoc, collection, getDocs, query, where,doc } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "./firebase";
-import { data } from '../src/lib/fakeData';
 
 export async function getEvents(filters = {} ) {
   let querySnapshot;
@@ -24,18 +23,28 @@ export async function getEvents(filters = {} ) {
 			// timestamp: serverTimestamp(),
 		};
 	});
-
 }
-export async function addEvent() {
-  const datas = {name: "test", location: "test Location", photo: "test photo", city: "test city", category: "test category"}//await generateEvent();
 
+export async function getTickets(id : string) {
+  let querySnapshot;
   try{
+    let q = query(collection(db,"tickets"), where("userId", "==", id));
+    // q = applyQueryFilters(q, filters);
 
-    const docRef = await addDoc(collection(db, "events"), datas);
-    return docRef;
-  } catch(e){
+     querySnapshot = await getDocs(q);
 
-    console.log("There was an error adding the document")
-    console.error("Error adding document: ", e);
-  } 
+  } catch (e){
+    console.log("There was an error getting the documents")
+    console.error("Error getting documents: ", e);
+    return {};
+  }
+  // return JSON.stringify(querySnapshot);
+  return querySnapshot.docs.map(doc => {
+		return {
+			
+			...doc.data(),
+			// Only plain objects can be passed to Client Components from Server Components
+			// timestamp: serverTimestamp(),
+		};
+	});
 }
