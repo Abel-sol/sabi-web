@@ -15,33 +15,30 @@ export async function POST(req: Request) {
     secretKey: process.env.CHAPA_SECRET_KEY as string,
   });
 
-  const tx_ref = await chapa.generateTransactionReference({
+  const tx_ref  = await chapa.generateTransactionReference({
     prefix: 'TX', // defaults to `TX`
     size: 20, // defaults to `15`
-  });
+  })
+  
   let response;
-  try {
-    await addDoc(collection(db, 'tickets', session.user.id), {
-      tx_ref: tx_ref,
-    });
-  } catch(e){
-    console.log(e);
-    return Response.json( { status: 500,"Firebase Error" : e });
-  }
+ 
  try{ 
+  await addDoc(collection(db, 'tickets', session.user.id), {
+    tx_ref: tx_ref,
+  });
   response = await chapa.initialize({
     first_name: session.user.name ?? "",
     last_name: "s",
     email: session.user.email ?? "",
     currency: 'ETB',
     amount: data.price.toString(),
-    tx_ref: tx_ref,
+    tx_ref: tx_ref ?? "tx-",
     return_url: "https://sabi-web.vercel.app/thankyou",
     customization: {
       title: 'Sabi payment',
       description: 'Test Description',
     },
-  });
+  })
 
 } catch (e){
   console.log(e);
