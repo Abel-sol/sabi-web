@@ -20,6 +20,14 @@ export async function POST(req: Request) {
     size: 20, // defaults to `15`
   });
   let response;
+  try {
+    await addDoc(collection(db, 'tickets', session.user.id), {
+      tx_ref: tx_ref,
+    });
+  } catch(e){
+    console.log(e);
+    return Response.json( { status: 500,"Firebase Error" : e });
+  }
  try{ 
   response = await chapa.initialize({
     first_name: session.user.name ?? "",
@@ -29,27 +37,18 @@ export async function POST(req: Request) {
     amount: data.price.toString(),
     tx_ref: tx_ref,
     return_url: "https://sabi-web.vercel.app/thankyou",
-    callback_url: "https://sabi-web.vercel.app/api/chapa/callback",
     customization: {
       title: 'Sabi payment',
       description: 'Test Description',
     },
   });
 
-  
 } catch (e){
   console.log(e);
   return Response.json({response}, { status: 500 , "statusText" : "there is a problem with chapas server"});
 }
 
-try {
-  await addDoc(collection(db, 'tickets'), {
-    tx_ref: tx_ref,
-    userId: session.user.id, // Store the user's UID with the post
-  });
-} catch(e){
-  console.log(e);
-}
+
 
   return Response.json( { status: 200, "details" : response });
 }
