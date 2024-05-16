@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     }catch(e){
       console.log(e);
       console.log("firebase error")
-      return Response.json({status: 500, "response" : "Internal Server Error"});
+      return;
     } 
     }
     return Response.json({status: 200});

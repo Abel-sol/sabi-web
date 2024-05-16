@@ -1,7 +1,5 @@
 import { Chapa } from "chapa-nodejs";
-import { addDoc, collection } from "firebase/firestore";
 import { getServerSession } from "next-auth";
-import { db } from "../../../../firebase/firebase";
 
 export async function POST(req: Request) {
   const session = await getServerSession();
@@ -53,17 +51,4 @@ export async function POST(req: Request) {
   console.log(e);
   return Response.json({response , e}, { status: 500 , "statusText" : "there is a problem with chapas server"});
 }
-try{
-  await addDoc(collection(db,"tickets"), {
-    id: data.id,
-    tx_ref : response.data.checkout_url
-  });
-}catch(e){
-  console.log(e);
-  console.log("firebase error")
-  return Response.json({status: 500, "response" : "Internal Server Error"});
-}
-
-
-  return Response.json( { status: 200, "details" : response });
 }
