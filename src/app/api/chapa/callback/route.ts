@@ -1,14 +1,10 @@
-import crypto from 'crypto';
 import { addDoc, collection } from 'firebase/firestore';
 import { getServerSession } from 'next-auth';
 import { db } from '../../../../../firebase/firebase';
 export async function POST(req: Request) {
   const session = await getServerSession();
-  const secret = process.env.CHAPA_HASH_KEY!;
-  const signiture = req.headers.get('Chapa-Signature');
-  
-  const hash = crypto.createHmac('sha256', secret).update(JSON.stringify(req.body)).digest('hex');
-    if (hash == signiture) {
+  // const secret = process.env.CHAPA_HASH_KEY!;
+
     // Retrieve the request's body
     const event = req.body;
     // Do something with event
@@ -22,6 +18,6 @@ export async function POST(req: Request) {
       console.log("firebase error")
       return;
     } 
-    }
+    // }
     return Response.json({status: 200});
 }
