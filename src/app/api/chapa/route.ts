@@ -19,32 +19,50 @@ export async function POST(req: Request) {
     prefix: 'TX', // defaults to `TX`
     size: 20, // defaults to `15`
   })
+
+  // const tx_ref = await generateRef();
+
+  // try {
+  //   await addDoc(collection(db, 'tickets', session.user.id), {
+  //     tx_ref: tx_ref,
+  //   });
+  // } catch(e){
+  //   console.log(e);
+  //   return Response.json( { status: 500,"Firebase Error" : e });
+  // }
   
   let response;
- 
+  let name : string[] = session.user.name?.split(" ") ?? [];
+  
  try{ 
-  await addDoc(collection(db, 'tickets', session.user.id), {
-    tx_ref: tx_ref,
-  });
   response = await chapa.initialize({
-    first_name: session.user.name ?? "",
-    last_name: "s",
+    first_name: name[0] ?? "",
+    last_name: name[1] ?? "",
     email: session.user.email ?? "",
     currency: 'ETB',
     amount: data.price.toString(),
-    tx_ref: tx_ref ?? "tx-",
+    tx_ref: tx_ref ,
     return_url: "https://sabi-web.vercel.app/thankyou",
     customization: {
-      title: 'Sabi payment',
+      title: data.name, 
       description: 'Test Description',
     },
   })
 
 } catch (e){
   console.log(e);
-  return Response.json({response}, { status: 500 , "statusText" : "there is a problem with chapas server"});
+  return Response.json({response , e}, { status: 500 , "statusText" : "there is a problem with chapas server"});
 }
-
+try{
+  await addDoc(collection(db,"tickets"), {
+    id: data.id,
+    tx_ref : response.data.checkout_url
+  });
+}catch(e){
+  console.log(e);
+  console.log("firebase error")
+  return Response.json({status: 500, "response" : "Internal Server Error"});
+}
 
 
   return Response.json( { status: 200, "details" : response });
