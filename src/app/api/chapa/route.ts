@@ -40,8 +40,8 @@ export async function POST(req: Request) {
     currency: 'ETB',
     amount: data.price.toString(),
     tx_ref: tx_ref ,
+    return_url: "https://sabi-web.vercel.app/thankyou",
     
-    callback_url: "https://sabi-web.vercel.app/api/chapa/callback",
     customization: {
       title: data.name, 
       description: 'Test Description',
@@ -52,4 +52,5 @@ export async function POST(req: Request) {
   console.log(e);
   return Response.json({response , e}, { status: 500 , "statusText" : "there is a problem with chapas server"});
 }
+  return Response.json({"details" : response},{status: 200});
 }
