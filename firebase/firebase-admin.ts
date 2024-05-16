@@ -1,7 +1,5 @@
 import { initFirestore } from '@auth/firebase-adapter';
 import admin from 'firebase-admin';
-import { signInWithCustomToken } from 'firebase/auth';
-import { auth } from './firebase';
 
 let app;
 
@@ -25,17 +23,17 @@ const adminDb = initFirestore({
 
 const adminAuth = admin.auth(app);
 
-async function syncFirebaseAuth(session : any) {
-  if (session && session.firebasetoken) {
-    try {
-      await signInWithCustomToken(auth, session.firebasetoken)
-    } catch (error) {
-      console.error('Error signing in with custom token:', error)
-    }
-  } else {
-    auth.signOut()
-  }
-}
+// async function syncFirebaseAuth(session : any) {
+//   if (session && session.firebasetoken) {
+//     try {
+//       await signInWithCustomToken(auth, session.firebasetoken)
+//     } catch (error) {
+//       console.error('Error signing in with custom token:', error)
+//     }
+//   } else {
+//     auth.signOut()
+//   }
+// }
 
-export { adminAuth, adminDb, syncFirebaseAuth };
+export { adminAuth, adminDb };
 

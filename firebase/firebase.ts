@@ -1,5 +1,4 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
@@ -23,7 +22,7 @@ const firebaseConfig = {
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app,"gs://sabi-web-66bb6.appspot.com"); 
-const auth = getAuth(app);
+// const auth = getAuth(app);
 
-export { auth, db, storage };
+export { db, storage };
 
