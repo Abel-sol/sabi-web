@@ -1,24 +1,26 @@
-import { addDoc, collection } from "firebase/firestore";
-import { getServerSession } from "next-auth";
-import { db } from "../../../../../firebase/firebase";
-
-async function POST(req: Request) {
+import crypto from 'crypto';
+import { addDoc, collection } from 'firebase/firestore';
+import { getServerSession } from 'next-auth';
+import { db } from '../../../../../firebase/firebase';
+export async function POST(req: Request) {
   const session = await getServerSession();
-  if (!session) return;
-
-  const data = await req.json();
-  if (data.status !== "successful") {
-    return Response.json({ status: 501, err: "Unseccessfull payment" })
-  }
-  try {
-    await addDoc(collection(db, "tickets"), {
-      tx_ref: data.tx_ref,
-      userId: session.user.id, // Store the user's UID with the post
-    });
-  } catch (e) {
-    console.log(e);
-    return Response.json({ status: 500, err: "couldnt add ticket to database" });
-  }
-
-  return Response.json({ status: 200, "res": "successfull" });
+  const secret = process.env.CHAPA_HASH_KEY!;
+  const signiture = req.headers.get('Chapa-Signature');
+  
+  const hash = crypto.createHmac('sha256', secret).update(JSON.stringify(req.body)).digest('hex');
+    if (hash == signiture) {
+    // Retrieve the request's body
+    const event = req.body;
+    // Do something with event
+    try{
+      await addDoc(collection(db,"tickets"), {
+        id:  session?.firebasetoken,
+        ...event
+      });
+    }catch(e){
+      console.log(e);
+      console.log("firebase error")
+      return Response.json({status: 500, "response" : "Internal Server Error"});
+    } 
+    }
 }
