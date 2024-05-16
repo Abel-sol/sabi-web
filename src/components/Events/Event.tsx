@@ -22,7 +22,8 @@ const Event = ({ eventData }: props) => {
     const res = await fetch("/api/chapa", {
       method: "POST",
       body: JSON.stringify({
-        ...event
+        ...event,
+        id: session.data.user.id
       }),
       headers: {
         "Content-Type": "application/json"
@@ -77,14 +78,14 @@ const Event = ({ eventData }: props) => {
           </div>
         </div>
         <div className="flex justify-center">
-          <Drawer>
+          <Drawer >
             <DrawerTrigger asChild>
               <Button className="w-full hover:bg-indigo-400 bg-indigo-500">Checkout</Button>
             </DrawerTrigger>
-            <DrawerContent className="w-full max-w-md" >
+            <DrawerContent className="w-full lg:max-w-2xl" >
               <DrawerHeader >
-                <DrawerTitle>Checkout</DrawerTitle>
-                <DrawerDescription>Complete your purchase by placing an order.</DrawerDescription>
+                <DrawerTitle className="text-center">Checkout</DrawerTitle>
+                <DrawerDescription className="text-center">Complete your purchase by placing an order.</DrawerDescription>
               </DrawerHeader>
               <DrawerFooter>
                 <Button type="submit" onClick={onSubmit} size="lg" className="bg-indigo-500 hover:bg-indigo-400">Place Order</Button>
