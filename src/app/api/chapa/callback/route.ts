@@ -5,12 +5,13 @@ export async function POST(req: Request) {
   const session = await getServerSession();
   // const secret = process.env.CHAPA_HASH_KEY!;
 
-    // Retrieve the request's body
-    const event = req.body;
+    // Retrieve the request's body 
+    
+    const event = await req.json();
     // Do something with event
+    
     try{
       await addDoc(collection(db,"tickets"), {
-        id:  session?.firebasetoken,
         ...event
       });
     }catch(e){
