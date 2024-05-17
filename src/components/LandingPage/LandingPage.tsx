@@ -7,7 +7,7 @@ const LandingPage = () => {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-t from-white to-indigo-500">
       <Nav />
-      <div className="flex min-h-screen flex-wrap w-full lg:w-1/2 text-black flex-col  items-start gap-2 pt-28 pl-32">
+      <div className="flex min-h-screen flex-wrap justify-center w-full lg:w-1/2 text-black flex-col  items-start gap-2 pt-28 pl-32">
         <div className="flex flex-col gap-2">
 
           <h1 className="text-4xl font-bold">Sabi 🎉</h1>
