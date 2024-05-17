@@ -35,19 +35,19 @@ Welcome to the Event Ticketing Web App, a platform designed to simplify the proc
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/event-ticketing-app.git
+    git clone https://github.com/Abel-sol/sabi-web.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd event-ticketing-app
+    cd sabi-web
     ```
 
 3. Install the dependencies:
 
     ```bash
-    npm install
+    yarn install
     ```
 
 4. Set up your environment variables. Create a `.env.local` file in the root of the project and add the following:
@@ -65,7 +65,7 @@ Welcome to the Event Ticketing Web App, a platform designed to simplify the proc
 5. Start the development server:
 
     ```bash
-    npm run dev
+    yarn run dev
     ```
 
 6. Open your browser and navigate to `http://localhost:3000`.
