@@ -9,9 +9,8 @@ Welcome to the Event Ticketing Web App, a platform designed to simplify the proc
 - **Event Browsing:** Easily explore events by category, location, date, or popularity.
 - **Search Functionality:** Quickly find specific events using the search bar.
 - **Event Details:** View detailed descriptions, schedules, and pricing information for each event.
-- **User Roles:** Different access levels for attendees, event organizers, and administrators.
-- **Booking and Confirmation:** Securely book tickets and receive instant confirmation via email.
-- **Authentication:** Robust authentication system using Firebase to ensure secure access.
+- **User Roles:** Different access levels for attendees and administrators.
+- **Authentication:** Robust authentication system using next-auth V4 to ensure secure access.
 - **Real-time Database:** Live updates and real-time data management with Firebase.
 - **Payment Integration:** Seamless payment processing through a local gateway (Chapa).
 
