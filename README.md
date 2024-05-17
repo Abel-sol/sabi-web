@@ -19,7 +19,7 @@ Welcome to the Event Ticketing Web App, a platform designed to simplify the proc
 - **Next.js:** Framework for server-rendered React applications.
 - **TypeScript:** Typed JavaScript for enhanced development experience.
 - **Tailwind CSS:** Utility-first CSS framework for styling.
-- **Firebase:** Backend services including authentication, real-time database, and hosting.
+- **Firebase:** Backend services including authentication, real-time database(Firestore).
 - **NextAuth.js:** Authentication for Next.js applications.
 
 ## Getting Started
