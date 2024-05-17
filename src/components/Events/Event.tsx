@@ -23,7 +23,6 @@ const Event = ({ eventData }: props) => {
       method: "POST",
       body: JSON.stringify({
         ...event,
-        id: session.data.user.id
       }),
       headers: {
         "Content-Type": "application/json"
