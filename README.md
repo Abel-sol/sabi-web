@@ -6,8 +6,8 @@ Welcome to the Event Ticketing Web App, a platform designed to simplify the proc
 
 ## Features
 
-- **Event Browsing:** Easily explore events by category, location, date, or popularity.
-- **Search Functionality:** Quickly find specific events using the search bar.
+- **Event Browsing:** Easily explore events by category, location, date, or popularity.(Coming soon)
+- **Search Functionality:** Quickly find specific events using the search bar. ( Comming soon )
 - **Event Details:** View detailed descriptions, schedules, and pricing information for each event.
 - **User Roles:** Different access levels for attendees and administrators.
 - **Authentication:** Robust authentication system using next-auth V4 to ensure secure access.
