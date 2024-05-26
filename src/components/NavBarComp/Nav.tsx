@@ -17,8 +17,8 @@ export default function Nav() {
 				<div className="flex-1">
 					<h1 className="font-semibold text-4xl  text-white">Sabi🎉</h1>
 				</div>
-				<div className="flex flex-1 items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-					<form className="ml-auto flex-1 sm:flex-initial">
+				<div className="flex flex-1 items-center justify-end px-2 gap-4 md:ml-auto md:gap-2 lg:gap-4">
+					<form className="hidden ml-auto flex-1 sm:flex-initial">
 						<div className="relative">
 							<SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
 							<Input
