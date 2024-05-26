@@ -6,15 +6,15 @@ import { EventData } from "../../type";
 
 export default async function Home() {
   // const searchParams = useParams();
-
   const eventData = await getEvents();
-  // console.log(eventData);
   let arr: EventData[] = Object.values(eventData);
+
+
 
   return (
     <div className="flex flex-col  h-screen  bg-white">
       <Nav />
-      {/* <ChapaInput /> */}
+
       <EventListings initialEvents={arr} />
 
       {/* TODO: will add searchParams to eventlistings for filtering events */}
